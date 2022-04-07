@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   # resources :posts
   # resources :forums
   # resources :users
-  resources :posts, only: [:show, :index, :create, :patch, :destroy]
   resources :comments, only: [:index, :show, :create, :update, :destroy]
+  resources :posts, only: [:index, :show, :create, :patch, :destroy]
+  # resources :comments, only: [:index, :show, :create, :update, :destroy]
   resources :forums, only: [:index, :show, :create]
   resources :users, only: [:show, :create, :update, :destroy]
   
