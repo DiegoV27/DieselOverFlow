@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 
 function ForumSearch({ search, setSearch, setFilteredResults }) {
-  // const [filteredReults, setFilteredResults] = useState([]);
 
   function searchResults(e) {
     setSearch(e.target.value);
     fetch(`/search?search=${e.target.value}`)
       .then((resp) => resp.json())
       .then((filteredReults) => {
-        // console.log(filteredReults);
         setFilteredResults(filteredReults);
       });
   }
@@ -23,7 +21,7 @@ function ForumSearch({ search, setSearch, setFilteredResults }) {
             value={search}
             // onChange={(e) => setSearch(e.target.value)}
             onChange={searchResults}
-            placeholder="Search CryptoDev"
+            placeholder="Search"
           ></input>
         </label>
       </form>
