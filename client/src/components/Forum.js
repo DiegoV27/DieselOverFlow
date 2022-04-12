@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import PostPreview from "./PostPreview";
 
 function Forum({ search, filteredReults, posts, setPosts }) {
-  // const [posts, setPosts] = useState([]);
   let searchTerms;
   {
     search === "" ? (searchTerms = posts) : (searchTerms = filteredReults);
