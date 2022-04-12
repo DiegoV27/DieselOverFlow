@@ -30,6 +30,35 @@ function Post({ user }) {
     );
   });
 
+
+//   let state;
+// function reducer(state = { count: 0 }, action) {
+//   switch (action.type) {
+//     case "counter/increment":
+//       return { count: state.count + 1 };
+//     default:
+//       return state;
+//   }
+// }
+
+// function dispatch(action) {
+//   state = reducer(state, action);
+//   render();
+// }
+
+// function render() {
+//   const container = document.getElementById("container");
+//   container.content = state.count;
+// }
+
+// dispatch({ type: "@@INIT" });
+
+// const button = document.getElementById("button");
+
+// button.addEventListener("click", () => {
+//   dispatch({ type: "counter/increment" });
+// });
+
   return (
     <div className="post">
       <h2 className="h2-bar">{post.title}</h2>
@@ -42,6 +71,9 @@ function Post({ user }) {
             <br />
             {post.user?.username}
           </p>
+          {/* <p>
+            <button>like</button>
+          </p> */}
         </div>
         <div className="comment-content">
           <p>
