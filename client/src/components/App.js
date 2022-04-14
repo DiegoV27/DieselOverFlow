@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import React, { useState, useEffect, createContext} from "react";
+import { Routes, Route, Link, NavLink } from "react-router-dom";
 import ForumSearch from "./ForumSearch";
 import Nav from "./Nav";
 import LoginPage from "./LoginPage";
@@ -7,6 +7,9 @@ import Forum from "./Forum";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
 import SignUpForm from "./SignupForm";
+import ProfilePage from "./ProfilePage";
+
+export const UserContext = createContext()
 
 function App() {
   const [user, setUser] = useState({});
@@ -63,6 +66,11 @@ function App() {
             <Link to="/signupform">
               <button className="login-btn">Signup</button>
             </Link>
+            {/* <nav>
+              <ul className='nav-links'>
+                <li className='naveffect'><NavLink to="/profilepage"></NavLink></li>
+              </ul>
+            </nav> */}
           </div>
           <span className="user-profile">
             {user?.username ? (
@@ -81,6 +89,11 @@ function App() {
         </div>
       </header>
       <Nav />
+      <div className="Nav">
+        <Routes>
+        <Route path="myprofile" element={<ProfilePage />} />
+        </Routes>
+      </div>
 
       <div className="container">
         <Routes>
