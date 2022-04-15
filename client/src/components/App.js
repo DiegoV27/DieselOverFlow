@@ -8,6 +8,7 @@ import Post from "./Post";
 import CreatePost from "./CreatePost";
 import SignUpForm from "./SignupForm";
 import ProfilePage from "./ProfilePage";
+import UserDisplay from "./UserDisplay";
 
 export const UserContext = createContext()
 
@@ -91,7 +92,7 @@ function App() {
       <Nav />
       <div className="Nav">
         <Routes>
-        <Route path="myprofile" element={<ProfilePage />} />
+        <Route path="UserDisplay" element={<UserDisplay user={user} />} />
         </Routes>
       </div>
 

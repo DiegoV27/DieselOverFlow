@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from './App'
+import MyPost from './MyPost'
 
 
 
@@ -19,22 +20,23 @@ function UserDisplay({ avatarURL, setAvatarURL}) {
           setBio(data.bio)
       }, [user])
     
-      function updateBio() {
-        fetch(`/users/${user.id}`, {
-          method: 'PATCH',
-          body: JSON.stringify({
-            bio: bio,
-          }),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-            'Accept': 'application/json'
-          },
-        })
-          .then(res => res.json())
-          .then(data => setBio(data.bio))
-          setIsEditBio(!bio)
+    
+        function updateBio() {
+            fetch(`/users/${user.id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                bio: bio,
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+                'Accept': 'application/json'
+            },
+            })
+            .then(res => res.json())
+            .then(data => setBio(data.bio))
+            setIsEditBio(!bio)
         }
-    }   
+    }
   })
 
     return (
@@ -58,6 +60,7 @@ function UserDisplay({ avatarURL, setAvatarURL}) {
             </div>
             : <p onClick={() => setIsEditBio(!isEditBio)} className='edit-bio'>Edit bio</p>
             }
+            <div className='mypost'><MyPost /></div>
         </div>
         </div>
     )
