@@ -10,7 +10,7 @@ function MyPost({ profPic }) {
 
   return (
     <div>
-        {sortedUserPosts.map(post => <ProfileFeedItem key={uuidv4()} profPic={profPic} props={post}/>)}
+        {sortedUserPosts?.map(post => <ProfileFeedItem key={uuidv4()} profPic={profPic} props={post}/>)}
     </div>
   )
 }
