@@ -2,12 +2,12 @@ import React from 'react'
 import UserDisplay from './UserDisplay'
 import ProfileFeed from './ProfileFeed'
 
-function ProfilePage({ profPic, setProfPic, setNewPost, setNewProject}) {
+function ProfilePage({ avatarURL, setAvatarURL, setNewPost, setNewProject}) {
   return (
     <>
     <div className='split'>
-      <ProfileFeed profPic={profPic} setNewPost={setNewPost}/>
-      <UserDisplay profPic={profPic} setProfPic={setProfPic} />
+      <ProfileFeed avatarURL={avatarURL} setNewPost={setNewPost}/>
+      <UserDisplay avatarURL={avatarURL} setAvatarURL={setAvatarURL} />
     </div>
     </>
   )
