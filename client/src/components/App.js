@@ -92,7 +92,7 @@ function App() {
       <Nav />
       <div className="Nav">
         <Routes>
-        <Route path="UserDisplay" element={<UserDisplay user={user} />} />
+        <Route path="UserDisplay" element={<UserDisplay />} />
         </Routes>
       </div>
 

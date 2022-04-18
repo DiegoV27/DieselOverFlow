@@ -1,15 +1,30 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from './App'
-import MyPost from './MyPost'
+import Post from './MyPost'
 
 
 
 function UserDisplay({ avatarURL, setAvatarURL}) {
     const [bio, setBio] = useState('')
     const [isEditBio, setIsEditBio] = useState(false)
-    // const [profPic, setProfPic] = useState(null)
-    // const [editProfPic, setEditProfPic] = useState(false)
+    // const [avatarURL, setAvatarURL] = useState(null)
+    const [editAvatarPic, setEditAvatarPic] = useState(false)
     const user = useContext(UserContext)
+
+
+    useEffect(() => {
+        if(user) {
+        fetch(`/user_images/${user.id}`)
+        .then(res => res.json())
+        .then(data => {
+          if(data.featured_image === null) {
+            setAvatarURL(user)
+          } else {
+            setAvatarURL(data.featured_image.url)
+          }
+        })}
+      },[])
+    
   
 
     useEffect(() => {
@@ -19,32 +34,56 @@ function UserDisplay({ avatarURL, setAvatarURL}) {
         .then(data => {
           setBio(data.bio)
       }, [user])
+    }
+})
     
     
-        function updateBio() {
+    function updateBio() {
+        fetch(`/users/${user.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+            bio: bio,
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json'
+        },
+    })
+        .then(res => res.json())
+        .then(data => setBio(data.bio))
+        setIsEditBio(!bio)
+    }
+    const handleSubmit = e => {
+            e.preventDefault();
+            const formData = new FormData()
+            formData.append("featured_image", avatarURL)
             fetch(`/users/${user.id}`, {
-            method: 'PATCH',
-            body: JSON.stringify({
-                bio: bio,
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-                'Accept': 'application/json'
-            },
+              method: 'PUT',
+              body: formData
             })
             .then(res => res.json())
-            .then(data => setBio(data.bio))
-            setIsEditBio(!bio)
-        }
+            .then(data => {
+              setAvatarURL(data.featured_image.url)
+              console.log(data)
+            
+            })
+            setEditAvatarPic(false)
     }
-  })
 
     return (
         <div className='column2'>
         <div className='name-pic'>
-            <img src={avatarURL} alt='avatar' id='avatar'/>
+        <img src={user?.avatarURL} />
             <p id='user-name'>{user?.username}</p>
         </div>
+        { editAvatarPic 
+      ? <form onSubmit={handleSubmit} id='upload'>
+          <input type="file" accept="image/*" multiple={false} onChange={setAvatarURL} /><br/>
+          <input type="submit" value="Submit"></input>
+        </form>
+      : null
+      } 
+      <p onClick={() => setEditAvatarPic(!editAvatarPic)} id='edit-prof'>Edit Image</p>
         <div id='bio'>
             <h2>Bio:</h2>
             { isEditBio 
@@ -55,14 +94,14 @@ function UserDisplay({ avatarURL, setAvatarURL}) {
             }
             { isEditBio
             ? <div className='bio-btns'>
-                {/* <p onClick={updateBio}>Save</p> */}
+                <p onClick={updateBio}>Save</p>
                 <p onClick={() => setIsEditBio(!isEditBio)}>Cancel</p>
             </div>
             : <p onClick={() => setIsEditBio(!isEditBio)} className='edit-bio'>Edit bio</p>
             }
-            <div className='mypost'><MyPost /></div>
+            <div className='mypost'><Post /></div>
         </div>
-        </div>
+    </div>
     )
 }
 export default UserDisplay
