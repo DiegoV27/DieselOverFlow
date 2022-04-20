@@ -4,6 +4,11 @@ class UsersController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found
     rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid
 
+        def index
+            users = User.all
+            render json: users, status: :ok
+        end
+
         
         def show
             current_user = User.find(session[:user_id])
@@ -18,6 +23,7 @@ class UsersController < ApplicationController
 
         def update
             user = User.find(params[:id])
+            # binding.break
             user.update!(user_params)
             render json: user, status: :accepted
         end
@@ -30,7 +36,7 @@ class UsersController < ApplicationController
         private
 
         def user_params
-            params.permit(:username, :email, :password, :avatar_url)
+            params.permit(:username, :email, :password, :avatar_url, :bio)
         end
 
 

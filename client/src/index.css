@@ -68,8 +68,8 @@ a:visited {
 }
 
 img {
-  width: 5em;
-  height: 5em;
+  width: 6em;
+  height: 6em;
   border: solid #d22727 2px;
   border-radius: 10px;
 }
@@ -117,6 +117,16 @@ img {
 
 .btn-wrapper {
   margin-top: 1.5em;
+}
+.column2 {
+  text-align: center;
+  padding: 0.5em 0.5em 3em 0.5em;
+  width: 100%;
+  background-color: rgb(206, 196, 196);
+  box-shadow: 0 0 0 3px rgba(221, 5, 30, 0.498),
+    1em 1em 3px 0 rgba(112, 5, 28, 0.247);
+  margin-top: 2em;
+  border-radius: 10px;
 }
 
 .user-profile {
