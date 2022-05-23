@@ -9,7 +9,6 @@ function ProfileFeed({ profPic, setNewPost }) {
   return (
     <div className='column1'>
       <Post profPic={profPic} setNewPost={setNewPost} />
-      {/* TODO: change "feed-btns" classname to be more generic (in HomePage too) */}
       <div class="feed-discover"> 
         <button type="button" className="feed-btns" onClick={() => setProjectsOrPosts("posts")}>My Posts</button>
       </div>
