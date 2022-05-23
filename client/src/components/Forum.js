@@ -13,7 +13,6 @@ function Forum({ search, filteredReults, posts, setPosts }) {
     fetch("/postpreviews")
       .then((r) => r.json())
       .then((posts) => {
-        // console.log(posts);
         setPosts(posts);
       });
   }, []);
